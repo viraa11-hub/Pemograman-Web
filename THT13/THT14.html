@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertamina Hospitals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        header {
+            background-color: #0b4d8c;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+    
+        nav li {
+            margin-right: 20px;
+        }
+    
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+    
+        nav img {
+            width: 100px;
+            height: 100px;
+        }
+    
+        main {
+            padding: 20px;
+        }
+    
+        section {
+            margin-bottom: 20px;
+        }
+    
+        /* Tampilan grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+    
+        /* Tampilan flexbox */
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    
+        .flex-item {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f5f5f5;
+        }
+    
+        /* Membuat gambar dan teks tengah dalam flex item */
+        .flex-item img {
+            display: block;
+            margin: 0 auto;
+        }
+    
+        .flex-item p {
+            text-align: center;
+        }
+        #hospitalData {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        // Fungsi untuk mengklik pada tautan "Lihat Dokter Kami"
+        function lihatDokter() {
+            window.location.href = "dokter.html";
+        }
+
+        // Mengaitkan fungsi dengan tautan "Lihat Dokter Kami"
+        var lihatDokterButton = document.querySelector('.cta-button');
+        lihatDokterButton.addEventListener('click', lihatDokter);
+
+        // Fungsi untuk mengatur efek hover pada gambar dokter
+        var dokterImages = document.querySelectorAll('.flex-item img');
+
+        dokterImages.forEach(function (image) {
+            image.addEventListener('mouseover', function () {
+                // Ganti gambar dengan gambar yang lebih besar saat dihover
+                var src = image.getAttribute('src');
+                image.src = src.replace('180', '300'); // Ubah lebar gambar menjadi 300
+            });
+
+            image.addEventListener('mouseout', function () {
+                // Kembalikan gambar ke ukuran awal setelah mouse meninggalkan gambar
+                var src = image.getAttribute('src');
+                image.src = src.replace('300', '180'); // Kembalikan lebar gambar ke 180
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ganti URL API dengan URL yang sesuai
+            var apiUrl = 'https://api.rumahsakitpertamina.com/data';
+        
+            // Mengambil data dari API menggunakan Fetch API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Menampilkan data Rumah Sakit Pertamina di dalam elemen dengan id "hospitalData"
+                    var hospitalDataElement = document.getElementById('hospitalData');
+                    var hospitals = data.hospitals;
+        
+                    hospitals.forEach(hospital => {
+                        var hospitalInfo = document.createElement('div');
+                        hospitalInfo.innerHTML = `
+                            <h3>${hospital.name}</h3>
+                            <p>Alamat: ${hospital.address}</p>
+                            <p>Telepon: ${hospital.phone}</p>
+                            <hr>
+                        `;
+                        hospitalDataElement.appendChild(hospitalInfo);
+                    });
+                }
+
+                // Mengambil data dari API menggunakan Fetch API
+                fetch(apiUrl)
+                    .then(handleErrors)
+                    .then(displayHospitalData)
+                    .catch(error => {
+                        console.error('Error fetching hospital data:', error.message);
+                        // Tampilkan pesan kesalahan kepada pengguna
+                        alert('Terjadi kesalahan saat mengambil data rumah sakit. Silakan coba lagi.');
+                    });
+            });
+    </script>
+</head>          
+<body>
+        <header>
+            <h1>Pertamina Hospitals</h1>
+            <nav>
+                <ul>
+                    <li><a href="profil.html">Profil</a></li>
+                    <li><a href="dokter.html">Dokter</a></li>
+                    <li><a href="layanan.html">Layanan</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="Profil">
+                <h2>Selamat Datang di Rumah Sakit Pertamina</h2>
+                <center><img src="gambar1.jpg" width="400" height="300"></center>
+                <p>Rumah Sakit Pertamina adalah jaringan fasilitas pelayanan kesehatan yang dimiliki dan dioperasikan oleh PT Pertamina (Persero), sebuah perusahaan minyak dan gas bumi terbesar di Indonesia. 
+                    Rumah Sakit Pertamina didirikan untuk memberikan layanan kesehatan kepada karyawan Pertamina dan keluarga mereka, serta untuk masyarakat umum.
+                    Rumah Sakit Pertamina menyediakan berbagai layanan medis dan fasilitas yang mencakup perawatan rawat inap, pelayanan gawat darurat, bedah, radiologi, laboratorium, konsultasi medis, dan banyak lagi. Mereka juga memiliki fasilitas-fasilitas modern dan peralatan medis terkini untuk memberikan perawatan medis yang berkualitas.
+                    Rumah Sakit Pertamina juga memiliki tim tenaga medis yang terdiri dari dokter spesialis, dokter umum, perawat, teknisi medis, serta staf pendukung medis lainnya. Tenaga medis ini memiliki kualifikasi dan pengalaman yang diperlukan untuk memberikan perawatan medis yang komprehensif.
+                    Rumah Sakit Pertamina memainkan peran penting dalam mendukung sistem perawatan kesehatan di Indonesia dan menyumbangkan pengetahuan dan pengalaman dalam bidang kesehatan.
+                    Rumah Sakit Pertamina berkomitmen untuk menjaga standar pelayanan medis yang tinggi dan memberikan kontribusi positif dalam bidang kesehatan. </p> 
+            </section>
+            <section id="dokter">
+                <h2>Dokter Kami</h2>
+                <a href="dokter.html" class="cta-button">Lihat Dokter Kami</a>
+    
+                <!--Tampilan flexbox -->
+                    <div class="flex-container">
+                    <div class="flex-item">
+                        <h3>Dokter Gigi</h3>
+                        <center><img src="gambar2.jpg" width="180" height="180"</center>
+                        <p>drg. Oktarina Anggeriani</p>
+                    </div>
+                    <div class="flex-item">
+                        <h3>Dokter Umum</h3>
+                        <center><img src="gambar3.jpg" width="180" height="180"</center>
+                        <p>dr. Eko Wahyu</p>
+                    </div>   
+                    <div class="flex-item">
+                            <h3>Psikolog</h3>
+                            <center><img src="gambar4.jpg" width="180" height="180"</center>
+                            <p>Nurul Adiningtyas, MPsi, Psikolog</p>
+                    </div> 
+                    <div class="flex-item">
+                        <h3>Penyakit Anak</h3>
+                        <center><img src="gambar5.jpg" width="180" height="180"</center>
+                        <p>dr. Moelyono, Sp.A</p>
+                    </div> 
+            </section>
+            <section id="layanan">
+                <h2>Layanan</h2>
+                <a href="layanan.html" class="cta-button">Lihat Layanan Kami</a>
+    
+                <!-- Tampilan Gridlayout -->
+                <div class="grid-container">
+                    <div class="flex-item">
+                        <h4>Akupuntur</h4>
+                        <center><img src="Gmbr1.jpg" width="200" height="150"></center>
+                        <p>Akupunktur (atau akupuntur) adalah suatu bentuk terapi alternatif yang berasal dari tradisi pengobatan Tiongkok kuno. 
+                           Terapi ini melibatkan penyisipan jarum-tipis pada titik-titik tertentu pada tubuh manusia untuk merangsang respon fisik dan meredakan berbagai masalah kesehatan.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h4>Kesehatan Anak</h4>
+                        <center><img src="Gmbr2.jpg" width="200" height="150"></center>
+                        <p>Pancaran kasih sayang dan kelembutan nan bersahaja dari para ahli medis dan perawatan kami akan senantiasa membias pada setiap pengangan yang kami berikan pada buah hati Anda. 
+                           Kami juga dilengkapi dengan On site Ultrasonografi yang di desain khusus untuk anak.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h4>Bedah Saraf</h4>
+                        <center><img src="Gmbr3.jpg" width="200" height="150"></center>
+                        <p>Pancaran kasih sayang dan kelembutan nan bersahaja dari para ahli medis dan perawatan kami akan senantiasa membias pada setiap pengangan yang kami berikan pada buah hati Anda. 
+                           Kami juga dilengkapi dengan On site Ultrasonografi yang di desain khusus untuk anak.</p>
+                    </div>
+                    <div class="flex-item">
+                        <h4>Instalasi Gigi & Mulut</h4>
+                        <center><img src="Gmbr4.jpg" width="200" height="150"></center>
+                        <p>Masalah lain yang sering kami tangani adalah gangguan gigi dan mulut untuk anak dan dewasa, dan apapun masalah kesehatan gigi & mulut Anda, Kami memberikan solusi sempurna bagi Anda.
+                           Sentuhan terampil dari para ahli kami akan membuat Anda nyaman serta mengembalikan senyum ceria dan rasa percaya diri Anda.</p>
+                    </div>
+                </div>
+            </section>
+                        
+            <section id="kontak">
+                <h2>Kontak Kami</h2>
+                <a href="kontak.html" class="cta-button">Lihat Kontak Kami</a>
+                <p>Informasi - Rumah Sakit Pertamina</p>
+                <p>Call Center : 18042 (24 Jam)</p>
+                <p>Email Marketing : marketing-rsp@ihc.id</p>
+            </section>
+            <body>
+                <div id="hospitalData"></div>
+                <script src="script.js"></script>
+            
+</body>
+</html>
